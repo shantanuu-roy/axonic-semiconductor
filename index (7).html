@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Axonic Semiconductor — Australia's First Sovereign OSAT</title>
+<meta name="description" content="Axonic Semiconductor is building Australia's first sovereign OSAT facility in Melbourne, Victoria. Advanced semiconductor packaging and test for defence, data centres, medical, space and critical infrastructure.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0A1628;
+    --navy-mid: #0F2040;
+    --navy-light: #1A3050;
+    --teal: #00B4CC;
+    --teal-dim: #007A8A;
+    --teal-glow: rgba(0, 180, 204, 0.15);
+    --white: #FFFFFF;
+    --off-white: #E8F4F8;
+    --grey: #8FA8B8;
+    --light-bg: #E6F7FA;
+    --font-display: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--navy);
+    color: var(--white);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 1.25rem 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(10, 22, 40, 0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0, 180, 204, 0.12);
+  }
+
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: var(--white);
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--teal); }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--grey);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--teal); }
+
+  .nav-cta {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--navy);
+    background: var(--teal);
+    padding: 0.6rem 1.4rem;
+    border-radius: 2px;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: opacity 0.2s;
+  }
+
+  .nav-cta:hover { opacity: 0.85; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    padding: 8rem 4rem 4rem;
+    overflow: hidden;
+  }
+
+  /* Circuit grid background */
+  #hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,180,204,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,180,204,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
+  }
+
+  /* Glow orb */
+  #hero::after {
+    content: '';
+    position: absolute;
+    top: 20%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(0,180,204,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal);
+    border: 1px solid rgba(0,180,204,0.3);
+    padding: 0.4rem 1rem;
+    border-radius: 2px;
+    margin-bottom: 2rem;
+    width: fit-content;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .hero-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--teal);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    max-width: 900px;
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+
+  .hero-title .accent { color: var(--teal); }
+
+  .hero-title .line2 {
+    display: block;
+    color: var(--grey);
+    font-weight: 600;
+  }
+
+  .hero-sub {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    font-weight: 300;
+    color: var(--grey);
+    max-width: 560px;
+    margin-top: 1.5rem;
+    line-height: 1.7;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2.5rem;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+
+  .btn-primary {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--navy);
+    background: var(--teal);
+    padding: 0.85rem 2rem;
+    border-radius: 2px;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+
+  .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+  .btn-secondary {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--teal);
+    background: transparent;
+    padding: 0.85rem 2rem;
+    border-radius: 2px;
+    border: 1px solid rgba(0,180,204,0.4);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--teal);
+    background: rgba(0,180,204,0.06);
+  }
+
+  /* Stats bar */
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    margin-top: 5rem;
+    background: rgba(0,180,204,0.15);
+    border: 1px solid rgba(0,180,204,0.15);
+    animation: fadeUp 0.8s 0.4s ease both;
+    max-width: 900px;
+  }
+
+  .stat {
+    background: rgba(10,22,40,0.95);
+    padding: 1.5rem 1.75rem;
+  }
+
+  .stat-value {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--teal);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--grey);
+    margin-top: 0.4rem;
+    letter-spacing: 0.04em;
+    line-height: 1.4;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTION COMMON ── */
+  section {
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 6rem 4rem;
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    max-width: 700px;
+  }
+
+  .section-body {
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--grey);
+    max-width: 600px;
+    margin-top: 1rem;
+    line-height: 1.75;
+  }
+
+  /* ── PROBLEM SECTION ── */
+  #problem {
+    background: var(--navy-mid);
+    border-top: 1px solid rgba(0,180,204,0.08);
+    border-bottom: 1px solid rgba(0,180,204,0.08);
+  }
+
+  .problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-top: 3rem;
+    align-items: center;
+  }
+
+  .problem-statement {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--white);
+  }
+
+  .problem-statement em {
+    color: var(--teal);
+    font-style: normal;
+  }
+
+  .problem-points {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .problem-point {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .point-icon {
+    width: 2px;
+    min-width: 2px;
+    height: 100%;
+    background: var(--teal);
+    margin-top: 0.35rem;
+    align-self: stretch;
+  }
+
+  .point-text {
+    font-size: 0.9375rem;
+    color: var(--grey);
+    line-height: 1.6;
+  }
+
+  .point-text strong {
+    color: var(--white);
+    font-weight: 500;
+  }
+
+  /* ── WHAT WE BUILD ── */
+  #solution {
+    background: var(--navy);
+  }
+
+  .solution-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: end;
+    margin-bottom: 3rem;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(0,180,204,0.1);
+    border: 1px solid rgba(0,180,204,0.1);
+  }
+
+  .service-card {
+    background: var(--navy);
+    padding: 2rem;
+    transition: background 0.3s;
+  }
+
+  .service-card:hover {
+    background: rgba(0,180,204,0.05);
+  }
+
+  .service-icon {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .service-name {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+
+  .service-desc {
+    font-size: 0.8125rem;
+    color: var(--grey);
+    line-height: 1.6;
+  }
+
+  /* ── CUSTOMERS ── */
+  #customers {
+    background: var(--navy-mid);
+    border-top: 1px solid rgba(0,180,204,0.08);
+    border-bottom: 1px solid rgba(0,180,204,0.08);
+  }
+
+  .customers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .customer-card {
+    border: 1px solid rgba(0,180,204,0.12);
+    padding: 1.75rem;
+    border-radius: 2px;
+    transition: border-color 0.3s, background 0.3s;
+  }
+
+  .customer-card:hover {
+    border-color: rgba(0,180,204,0.4);
+    background: rgba(0,180,204,0.04);
+  }
+
+  .customer-icon {
+    font-size: 1.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .customer-name {
+    font-family: var(--font-display);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.4rem;
+  }
+
+  .customer-desc {
+    font-size: 0.8125rem;
+    color: var(--grey);
+    line-height: 1.6;
+  }
+
+  /* ── ROADMAP ── */
+  #roadmap {
+    background: var(--navy);
+  }
+
+  .roadmap-phases {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(0,180,204,0.1);
+    border: 1px solid rgba(0,180,204,0.1);
+    margin-top: 3rem;
+  }
+
+  .phase {
+    background: var(--navy);
+    padding: 2rem 1.5rem;
+    position: relative;
+    transition: background 0.3s;
+  }
+
+  .phase:hover { background: rgba(0,180,204,0.04); }
+
+  .phase-number {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    font-weight: 800;
+    color: rgba(0,180,204,0.12);
+    line-height: 1;
+    margin-bottom: 0.75rem;
+  }
+
+  .phase-timeline {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 0.5rem;
+  }
+
+  .phase-name {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.75rem;
+  }
+
+  .phase-capex {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--teal);
+    font-family: var(--font-display);
+    margin-bottom: 0.75rem;
+  }
+
+  .phase-desc {
+    font-size: 0.8125rem;
+    color: var(--grey);
+    line-height: 1.6;
+  }
+
+  /* ── FOUNDER ── */
+  #founder {
+    background: var(--navy-mid);
+    border-top: 1px solid rgba(0,180,204,0.08);
+  }
+
+  .founder-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    margin-top: 3rem;
+  }
+
+  .founder-name {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.25rem;
+  }
+
+  .founder-title {
+    font-size: 0.875rem;
+    color: var(--teal);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    margin-bottom: 1.5rem;
+  }
+
+  .founder-bio {
+    font-size: 0.9375rem;
+    color: var(--grey);
+    line-height: 1.75;
+    margin-bottom: 2rem;
+  }
+
+  .credentials {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .credential {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.875rem;
+    color: var(--grey);
+  }
+
+  .credential-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--teal);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .founder-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .traction-item {
+    border: 1px solid rgba(0,180,204,0.12);
+    padding: 1.25rem 1.5rem;
+    border-radius: 2px;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    transition: border-color 0.2s;
+  }
+
+  .traction-item:hover { border-color: rgba(0,180,204,0.35); }
+
+  .traction-label {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 0.25rem;
+  }
+
+  .traction-text {
+    font-size: 0.875rem;
+    color: var(--grey);
+    line-height: 1.5;
+  }
+
+  /* ── SOVEREIGN ── */
+  #sovereign {
+    background: var(--navy);
+    border-top: 1px solid rgba(0,180,204,0.08);
+  }
+
+  .sovereign-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .sovereign-card {
+    position: relative;
+    padding: 2rem;
+    border-left: 2px solid var(--teal);
+    background: rgba(0,180,204,0.03);
+  }
+
+  .sovereign-title {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.75rem;
+  }
+
+  .sovereign-text {
+    font-size: 0.875rem;
+    color: var(--grey);
+    line-height: 1.7;
+  }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: var(--navy-mid);
+    border-top: 1px solid rgba(0,180,204,0.08);
+  }
+
+  .contact-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .form-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--grey);
+  }
+
+  .form-input, .form-select, .form-textarea {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(0,180,204,0.15);
+    color: var(--white);
+    padding: 0.75rem 1rem;
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    border-radius: 2px;
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+
+  .form-input::placeholder,
+  .form-textarea::placeholder { color: rgba(143,168,184,0.5); }
+
+  .form-input:focus,
+  .form-select:focus,
+  .form-textarea:focus { border-color: var(--teal); }
+
+  .form-select {
+    appearance: none;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2300B4CC' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+  }
+
+  .form-select option { background: var(--navy); }
+
+  .form-textarea { min-height: 120px; resize: vertical; }
+
+  .form-submit {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--navy);
+    background: var(--teal);
+    border: none;
+    padding: 0.9rem 2rem;
+    border-radius: 2px;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    transition: opacity 0.2s;
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  .form-submit:hover { opacity: 0.85; }
+
+  .contact-info {
+    margin-top: 2rem;
+  }
+
+  .contact-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-detail-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--teal);
+  }
+
+  .contact-detail-value {
+    font-size: 0.9375rem;
+    color: var(--white);
+  }
+
+  .contact-detail-value a {
+    color: var(--white);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .contact-detail-value a:hover { color: var(--teal); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    border-top: 1px solid rgba(0,180,204,0.1);
+    padding: 2rem 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    z-index: 1;
+  }
+
+  .footer-logo {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: var(--white);
+  }
+
+  .footer-logo span { color: var(--teal); }
+
+  .footer-legal {
+    font-size: 0.75rem;
+    color: var(--grey);
+    text-align: center;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .footer-links a {
+    font-size: 0.8rem;
+    color: var(--grey);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--teal); }
+
+  /* ── NV1 BADGE ── */
+  .nv1-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--navy);
+    background: var(--teal);
+    padding: 0.3rem 0.8rem;
+    border-radius: 2px;
+  }
+
+  /* ── DIVIDER LINE ── */
+  .teal-line {
+    width: 48px;
+    height: 2px;
+    background: var(--teal);
+    margin: 1.5rem 0;
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .section-inner { padding: 4rem 1.5rem; }
+    #hero { padding: 7rem 1.5rem 3rem; }
+    .hero-title { font-size: 2.8rem; }
+    .hero-stats { grid-template-columns: repeat(2, 1fr); }
+    .problem-grid,
+    .solution-header,
+    .founder-grid,
+    .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .services-grid,
+    .customers-grid,
+    .sovereign-grid { grid-template-columns: 1fr; }
+    .roadmap-phases { grid-template-columns: repeat(2, 1fr); }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+    .footer-links { justify-content: center; }
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">AXONIC<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#problem">The Gap</a></li>
+    <li><a href="#solution">Services</a></li>
+    <li><a href="#customers">Customers</a></li>
+    <li><a href="#sovereign">Why Axonic</a></li>
+    <li><a href="#founder">Founder</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Request Deck</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-badge">Now Raising — Phase 1 Capital Round</div>
+  <h1 class="hero-title">
+    Packaging<br>
+    <span class="accent">Australia's</span><br>
+    <span class="line2">Digital Future.</span>
+  </h1>
+  <p class="hero-sub">
+    Axonic Semiconductor is building Australia's first sovereign Outsourced Semiconductor Assembly and Test (OSAT) facility in Melbourne, Victoria. The missing piece of Australia's sovereign AI supply chain.
+  </p>
+  <div class="hero-actions">
+    <a href="#contact" class="btn-primary">Request Investor Deck →</a>
+    <a href="#sovereign" class="btn-secondary">Why Axonic</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-value">ZERO</div>
+      <div class="stat-label">OSAT Facilities<br>in Australia</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">$700B+</div>
+      <div class="stat-label">Global Semiconductor<br>Market</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">$46.5B</div>
+      <div class="stat-label">Global OSAT<br>Market 2025</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">50–80</div>
+      <div class="stat-label">Victorian Jobs<br>Phase 1</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section id="problem">
+  <div class="section-inner">
+    <div class="section-label reveal">The Problem</div>
+    <div class="problem-grid">
+      <div>
+        <h2 class="section-title reveal">Australia has <span style="color:var(--teal)">zero</span> semiconductor packaging facilities.</h2>
+        <div class="teal-line reveal"></div>
+        <p class="section-body reveal">
+          Every chip powering Australia's defence systems, data centres, hospitals and critical infrastructure is packaged offshore — through supply chains we do not own, control or audit.
+        </p>
+        <p class="section-body reveal" style="margin-top:1rem;">
+          Firmus Technologies is deploying 54,000+ Nvidia GPUs across Melbourne and Tasmania under Project Southgate — a $73B sovereign AI infrastructure investment. Every one of those chips arrives packaged from Asia.
+        </p>
+        <p class="section-body reveal" style="margin-top:1rem; color: var(--white); font-weight: 500;">
+          That is not sovereign AI. That is sovereign compute on foreign supply chains. Axonic Semiconductor fixes this.
+        </p>
+      </div>
+      <div class="problem-points reveal">
+        <div class="problem-point">
+          <div class="point-icon"></div>
+          <div class="point-text"><strong>Defence & AUKUS risk</strong> — classified chip designs leave Australia for packaging. AUKUS Pillar 2 demands sovereign advanced manufacturing. No facility exists.</div>
+        </div>
+        <div class="problem-point">
+          <div class="point-icon"></div>
+          <div class="point-text"><strong>AI infrastructure gap</strong> — $73B of AI compute is being deployed in Australia. The packaging layer that makes it sovereign does not exist.</div>
+        </div>
+        <div class="problem-point">
+          <div class="point-icon"></div>
+          <div class="point-text"><strong>Fabless industry stranded</strong> — Morse Micro, BrainChip, Silicon Quantum Computing design world-class chips in Australia. All packaged offshore.</div>
+        </div>
+        <div class="problem-point">
+          <div class="point-icon"></div>
+          <div class="point-text"><strong>Geopolitical exposure</strong> — 95% of advanced semiconductor packaging is concentrated in Taiwan, Malaysia and China. A disruption stops Australia cold.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION / SERVICES -->
+<section id="solution">
+  <div class="section-inner">
+    <div class="solution-header">
+      <div>
+        <div class="section-label reveal">Our Services</div>
+        <h2 class="section-title reveal">Phase 1 Technology Stack</h2>
+        <div class="teal-line reveal"></div>
+        <p class="section-body reveal">Commercial OSAT services using proven, bankable processes — designed for sovereign auditability and DISP accreditation from day one.</p>
+      </div>
+      <div class="reveal" style="display:flex; flex-direction:column; gap:0.75rem;">
+        <div style="font-size:0.8125rem; color:var(--grey); line-height:1.7;">
+          Axonic Semiconductor is purpose-built for the AI compute era — with sovereign auditability, chain-of-custody at every process step, and cleared operations designed for DISP accreditation from day one.
+        </div>
+      </div>
+    </div>
+    <div class="services-grid reveal">
+      <div class="service-card">
+        <div class="service-icon">⬡</div>
+        <div class="service-name">Wire Bond Packaging</div>
+        <div class="service-desc">Gold and copper wire bond for standard and high-reliability packages. K&S and ASMPT platforms.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">◈</div>
+        <div class="service-name">Flip Chip Assembly</div>
+        <div class="service-desc">Controlled collapse chip connection for high-density, high-performance devices.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">▣</div>
+        <div class="service-name">Die Attach</div>
+        <div class="service-desc">Epoxy and eutectic die attach for standard and high-power applications. Besi platform.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">◎</div>
+        <div class="service-name">Failure Analysis</div>
+        <div class="service-desc">SEM, FIB, C-SAM, X-Ray and optical analysis. Counterfeit detection. Secure chain of custody documentation. DISP accreditation pathway in progress.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">⊞</div>
+        <div class="service-name">Electrical Test</div>
+        <div class="service-desc">Functional and parametric test. Teradyne and Advantest platforms. Burn-in capability.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">◉</div>
+        <div class="service-name">X-Ray & Inspection</div>
+        <div class="service-desc">2D and 3D X-Ray, scanning acoustic microscopy (C-SAM). JEDEC and MIL-STD compliant.</div>
+      </div>
+    </div>
+    <div class="reveal" style="margin-top:2rem; padding:1.5rem 2rem; border:1px solid rgba(0,180,204,0.15); background:rgba(0,180,204,0.03);">
+      <div style="font-size:0.75rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--teal); margin-bottom:0.5rem;">Phase 2 Advanced Packaging — From 2029</div>
+      <div style="font-size:0.875rem; color:var(--grey);">Fan-Out Wafer Level Packaging (FO-WLP) · 2.5D Interposer · System in Package (SiP) · Through-Silicon Via (TSV) · Chiplet Integration</div>
+    </div>
+  </div>
+</section>
+
+<!-- CUSTOMERS -->
+<section id="customers">
+  <div class="section-inner">
+    <div class="section-label reveal">Customer Universe</div>
+    <h2 class="section-title reveal">Built for Australia's Most Critical Industries</h2>
+    <div class="teal-line reveal"></div>
+    <p class="section-body reveal">We serve customers who cannot afford supply chain risk — because the systems their chips power are too important to fail.</p>
+    <div class="customers-grid reveal">
+      <div class="customer-card">
+        <div class="customer-icon">🛡</div>
+        <div class="customer-name">Defence & AUKUS</div>
+        <div class="customer-desc">DISP-accredited facility for Australian defence agencies, prime contractors and AUKUS programme participants requiring sovereign chip packaging.</div>
+      </div>
+      <div class="customer-card">
+        <div class="customer-icon">⚡</div>
+        <div class="customer-name">Data Centres & Hyperscalers</div>
+        <div class="customer-desc">Sovereign packaging for AI compute infrastructure operators deploying at scale in Australia who require local, auditable supply chains.</div>
+      </div>
+      <div class="customer-card">
+        <div class="customer-icon">🔬</div>
+        <div class="customer-name">Medical Devices</div>
+        <div class="customer-desc">ISO 13485-aligned operations for Australian medical technology manufacturers requiring implantable and life-critical device packaging.</div>
+      </div>
+      <div class="customer-card">
+        <div class="customer-icon">🛰</div>
+        <div class="customer-name">Space & Satellites</div>
+        <div class="customer-desc">Radiation-tolerant packaging for Australia's growing space economy — MIL-STD compliant, chain-of-custody controlled.</div>
+      </div>
+      <div class="customer-card">
+        <div class="customer-icon">🔗</div>
+        <div class="customer-name">Critical Infrastructure</div>
+        <div class="customer-desc">Sovereign packaging for telecommunications, power, water and national infrastructure operators who cannot tolerate offshore supply chain risk.</div>
+      </div>
+      <div class="customer-card">
+        <div class="customer-icon">💡</div>
+        <div class="customer-name">Australian Fabless Designers</div>
+        <div class="customer-desc">Local packaging for Australian-designed chips for the first time — enabling a sovereign end-to-end semiconductor supply chain on home soil.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INVESTMENT OPPORTUNITY -->
+<section id="roadmap" style="background:var(--navy-mid); border-top:1px solid rgba(0,180,204,0.08); border-bottom:1px solid rgba(0,180,204,0.08);">
+  <div class="section-inner" style="text-align:center; max-width:780px; margin:0 auto; padding:6rem 2rem;">
+    <div class="section-label reveal">Investment Opportunity</div>
+    <h2 class="section-title reveal" style="max-width:100%;">We are raising Phase 1 capital.</h2>
+    <div class="teal-line reveal" style="margin:1.5rem auto;"></div>
+    <p class="reveal" style="font-size:1.125rem; font-weight:300; color:var(--grey); line-height:1.8; margin-bottom:1rem;">
+      Australia has never had a semiconductor packaging facility. We are building the first one — and we are raising the capital to make it happen.
+    </p>
+    <p class="reveal" style="font-size:1.125rem; font-weight:300; color:var(--grey); line-height:1.8; margin-bottom:3rem;">
+      If you are a deep tech investor, strategic partner or sovereign capital provider who understands what this moment means for Australia — we want to talk.
+    </p>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(0,180,204,0.1); border:1px solid rgba(0,180,204,0.1); margin-bottom:3rem;" class="reveal">
+      <div style="background:var(--navy); padding:2rem; text-align:center;">
+        <div style="font-family:var(--font-display); font-size:2rem; font-weight:800; color:var(--teal);">$15–25M</div>
+        <div style="font-size:0.8rem; color:var(--grey); margin-top:0.4rem; letter-spacing:0.04em;">Phase 1 Capital Target</div>
+      </div>
+      <div style="background:var(--navy); padding:2rem; text-align:center;">
+        <div style="font-family:var(--font-display); font-size:2rem; font-weight:800; color:var(--teal);">50–80</div>
+        <div style="font-size:0.8rem; color:var(--grey); margin-top:0.4rem; letter-spacing:0.04em;">Victorian Jobs Created</div>
+      </div>
+      <div style="background:var(--navy); padding:2rem; text-align:center;">
+        <div style="font-family:var(--font-display); font-size:2rem; font-weight:800; color:var(--teal);">$46.5B</div>
+        <div style="font-size:0.8rem; color:var(--grey); margin-top:0.4rem; letter-spacing:0.04em;">Global OSAT Market 2025</div>
+      </div>
+    </div>
+    <div class="reveal">
+      <a href="#contact" class="btn-primary" style="display:inline-block; font-size:1rem; padding:1rem 2.5rem;">Request Investor Deck →</a>
+    </div>
+  </div>
+</section>
+
+<!-- SOVEREIGN MOAT -->
+<section id="sovereign">
+  <div class="section-inner">
+    <div class="section-label reveal">Why Axonic</div>
+    <h2 class="section-title reveal">Sovereign by Design. Not by Declaration.</h2>
+    <div class="teal-line reveal"></div>
+    <div class="sovereign-grid reveal">
+      <div class="sovereign-card">
+        <div class="sovereign-title">Security by Architecture</div>
+        <div class="sovereign-text">Founded by a senior enterprise security architect with active Australian government security clearance. Sovereign auditability is our foundation — not a feature added for compliance. Zero-trust principles applied to physical semiconductor manufacturing.</div>
+      </div>
+      <div class="sovereign-card">
+        <div class="sovereign-title">DISP Accreditation Pathway</div>
+        <div class="sovereign-text">DISP (Defence Industry Security Programme) accreditation in progress. The only pathway to packaging classified defence chips on Australian soil. Required for AUKUS Pillar 2 supply chain participation.</div>
+      </div>
+      <div class="sovereign-card">
+        <div class="sovereign-title">Five Eyes Aligned</div>
+        <div class="sovereign-text">Australia is the only Five Eyes nation with zero semiconductor packaging capability. Axonic Semiconductor closes this gap — creating a western-aligned, auditable OSAT node for allied nation defence programmes.</div>
+      </div>
+      <div class="sovereign-card">
+        <div class="sovereign-title">Chain of Custody</div>
+        <div class="sovereign-text">Every wafer, every die, every packaged unit tracked with full chain-of-custody documentation. MES-integrated, tamper-evident, auditable by customers and regulators. The zero-trust approach applied to physical manufacturing.</div>
+      </div>
+      <div class="sovereign-card">
+        <div class="sovereign-title">Ecosystem Anchor</div>
+        <div class="sovereign-text">Axonic Semiconductor anchors Australia's first end-to-end semiconductor ecosystem — connecting Australian chip designers to a local packaging facility for the first time in history. Victorian manufacturing, Australian supply chain.</div>
+      </div>
+      <div class="sovereign-card">
+        <div class="sovereign-title">Strategic Partnerships</div>
+        <div class="sovereign-text">Strategic OSAT partnership discussions underway with Asian tier-2 OSAT operators for technology licence and operational expertise. Active engagement with Semiconductor Australia (S3B) ecosystem and Australian university research programmes.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER -->
+<section id="founder">
+  <div class="section-inner">
+    <div class="section-label reveal">Founder</div>
+    <div class="founder-grid">
+      <div class="reveal">
+        <div class="founder-name">Shantanuu Roy</div>
+        <div class="founder-title">Founder & CEO — Axonic Semiconductor</div>
+        <p class="founder-bio">
+          I spent nearly two decades building sovereign infrastructure for Australia's most critical institutions. That work taught me one thing above all else: sovereignty is not declared — it is built, process by process, at the physical layer.
+        </p>
+        <p class="founder-bio">
+          Axonic Semiconductor is that physical layer. The one Australia has never had. The one it cannot afford to go without.
+        </p>
+        <p class="founder-bio">
+          Melbourne-based. Fully committed. Building this for the next 100 years.
+        </p>
+      </div>
+      <div class="founder-right reveal">
+        <div class="traction-item">
+          <div>
+            <div class="traction-label">The Mission</div>
+            <div class="traction-text">Australia has never had a semiconductor packaging facility. Axonic Semiconductor is building the first one — purpose-designed for the sovereign AI era.</div>
+          </div>
+        </div>
+        <div class="traction-item">
+          <div>
+            <div class="traction-label">The Advantage</div>
+            <div class="traction-text">A security architect who spent two decades protecting critical national infrastructure is uniquely positioned to build sovereign semiconductor manufacturing. The discipline is the same. The stakes are the same.</div>
+          </div>
+        </div>
+        <div class="traction-item">
+          <div>
+            <div class="traction-label">The Timing</div>
+            <div class="traction-text">$73 billion of AI compute infrastructure is being deployed in Australia right now. Every chip arrives packaged from Asia. The window to build sovereign packaging capability is open — and closing.</div>
+          </div>
+        </div>
+        <div class="traction-item">
+          <div>
+            <div class="traction-label">The Commitment</div>
+            <div class="traction-text">Melbourne-based. Fully committed. Building Axonic Semiconductor for the next 100 years.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-label reveal">Get Involved</div>
+    <h2 class="section-title reveal">Ready to Back Australia's First Sovereign OSAT?</h2>
+    <div class="teal-line reveal"></div>
+    <div class="contact-inner reveal">
+      <div>
+        <p class="section-body">We are raising $15–25M to establish Australia's first sovereign OSAT facility. If you are an investor, strategic partner or government body who wants to be part of this — request our investor deck or book a call directly.</p>
+        <form class="contact-form" action="https://formspree.io/f/mlgakbyo" method="POST" onsubmit="handleSubmit(event)">
+          <div class="form-group">
+            <label class="form-label">Full Name</label>
+            <input type="text" class="form-input" placeholder="Your name" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Organisation</label>
+            <input type="text" class="form-input" placeholder="Fund, company or institution">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-input" placeholder="your@email.com" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">I am a</label>
+            <select class="form-select form-input">
+              <option value="">Select...</option>
+              <option>Investor — VC or Private Equity</option>
+              <option>Investor — Angel or Family Office</option>
+              <option>Strategic Partner — Semiconductor</option>
+              <option>Government Body</option>
+              <option>Potential Customer</option>
+              <option>Semiconductor Professional</option>
+              <option>Media</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">What are you looking for?</label>
+            <textarea class="form-textarea form-input" placeholder="Investor deck, partnership discussion, customer inquiry, media inquiry..."></textarea>
+          </div>
+          <button type="submit" class="form-submit">Request Information →</button>
+        </form>
+      </div>
+      <div class="contact-info">
+        <div style="padding:1.5rem; background:rgba(0,180,204,0.08); border:1px solid rgba(0,180,204,0.25); margin-bottom:1.5rem; border-radius:2px;">
+          <div style="font-size:0.7rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--teal); margin-bottom:0.5rem;">Book A Call</div>
+          <div style="font-size:0.875rem; color:var(--grey); margin-bottom:1rem; line-height:1.6;">Schedule a 30-minute call with Shantanuu directly to discuss the investment opportunity.</div>
+          <a href="https://calendly.com/shantanuu-axonicai/30min" target="_blank" style="display:inline-block; font-family:var(--font-body); font-size:0.875rem; font-weight:500; color:var(--navy); background:var(--teal); padding:0.65rem 1.5rem; border-radius:2px; text-decoration:none; letter-spacing:0.04em;">Book 30-Min Call →</a>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-label">Email</div>
+          <div class="contact-detail-value"><a href="mailto:shantanuu@axonic.com.au">shantanuu@axonic.com.au</a></div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-label">Phone</div>
+          <div class="contact-detail-value"><a href="tel:+61452410215">+61 452 410 215</a></div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-label">Location</div>
+          <div class="contact-detail-value">Melbourne, Victoria, Australia 🇦🇺</div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-label">LinkedIn</div>
+          <div class="contact-detail-value"><a href="https://linkedin.com/in/rsantanu" target="_blank">Shantanuu Roy</a></div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-label">X / Twitter</div>
+          <div class="contact-detail-value"><a href="https://x.com/Shantanuu_Roy" target="_blank">@Shantanuu_Roy</a></div>
+        </div>
+        <div style="margin-top:1.5rem; padding:1.25rem; border:1px solid rgba(0,180,204,0.15); background:rgba(0,180,204,0.04); border-radius:2px;">
+          <div style="font-size:0.7rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--teal); margin-bottom:0.75rem;">Downloads</div>
+          <a href="#" style="display:block; font-size:0.875rem; color:var(--white); text-decoration:none; margin-bottom:0.5rem; transition:color 0.2s;" onmouseover="this.style.color='var(--teal)'" onmouseout="this.style.color='var(--white)'">→ Company One-Pager (PDF)</a>
+          <a href="#" style="display:block; font-size:0.875rem; color:var(--white); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='var(--teal)'" onmouseout="this.style.color='var(--white)'">→ Investor Information Package</a>
+        </div>
+        <div style="margin-top:1rem; font-size:0.75rem; color:var(--grey); line-height:1.6;">
+          Axonic AI Pty Ltd | ACN 694 833 871<br>
+          Trading as Axonic Semiconductor<br>
+          Melbourne, Victoria, Australia
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">AXONIC<span>.</span></div>
+  <div class="footer-legal">
+    © 2026 Axonic AI Pty Ltd | ACN 694 833 871 | Trading as Axonic Semiconductor<br>
+    Melbourne, Victoria, Australia | All rights reserved
+  </div>
+  <div class="footer-links">
+    <a href="https://linkedin.com/in/rsantanu" target="_blank">LinkedIn</a>
+    <a href="https://x.com/Shantanuu_Roy" target="_blank">X</a>
+    <a href="mailto:shantanuu@axonic.com.au">Contact</a>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => {
+      if (el.isIntersecting) {
+        el.target.classList.add('visible');
+        observer.unobserve(el.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Nav scroll effect
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    nav.style.borderBottomColor = window.scrollY > 50
+      ? 'rgba(0,180,204,0.2)'
+      : 'rgba(0,180,204,0.12)';
+  });
+
+  // Form submit
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const btn = form.querySelector('.form-submit');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        btn.textContent = 'Message Sent ✓';
+        btn.style.background = '#27AE60';
+        form.reset();
+        setTimeout(() => {
+          btn.textContent = 'Request Information →';
+          btn.style.background = 'var(--teal)';
+          btn.disabled = false;
+        }, 4000);
+      } else {
+        throw new Error('Form submission failed');
+      }
+    } catch (err) {
+      btn.textContent = 'Something went wrong — email us directly';
+      btn.style.background = '#C0392B';
+      btn.disabled = false;
+    }
+  }
+</script>
+</body>
+</html>
