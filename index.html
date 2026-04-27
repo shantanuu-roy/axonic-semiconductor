@@ -1195,19 +1195,19 @@
         <form class="contact-form" action="https://formspree.io/f/mlgakbyo" method="POST" onsubmit="handleSubmit(event)">
           <div class="form-group">
             <label class="form-label">Full Name</label>
-            <input type="text" class="form-input" placeholder="Your name" required>
+            <input type="text" name="name" class="form-input" placeholder="Your name" required>
           </div>
           <div class="form-group">
             <label class="form-label">Organisation</label>
-            <input type="text" class="form-input" placeholder="Fund, company or institution">
+            <input type="text" name="organisation" class="form-input" placeholder="Fund, company or institution">
           </div>
           <div class="form-group">
             <label class="form-label">Email</label>
-            <input type="email" class="form-input" placeholder="your@email.com" required>
+            <input type="email" name="email" class="form-input" placeholder="your@email.com" required>
           </div>
           <div class="form-group">
             <label class="form-label">I am a</label>
-            <select class="form-select form-input">
+            <select name="type" class="form-select form-input">
               <option value="">Select...</option>
               <option>Investor — VC or Private Equity</option>
               <option>Investor — Angel or Family Office</option>
@@ -1221,7 +1221,7 @@
           </div>
           <div class="form-group">
             <label class="form-label">What are you looking for?</label>
-            <textarea class="form-textarea form-input" placeholder="Investor deck, partnership discussion, customer inquiry, media inquiry..."></textarea>
+            <textarea name="message" class="form-textarea form-input" placeholder="Investor deck, partnership discussion, customer inquiry, media inquiry..."></textarea>
           </div>
           <button type="submit" class="form-submit">Request Information →</button>
         </form>
